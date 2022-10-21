@@ -21,7 +21,7 @@ public class MflixService {
     }
 
     public Object getMflixUsersWithAge(int age) {
-        AggregationResults<Object> aggResult = mflixRepository.findTestAggregation(age);
+        AggregationResults<?> aggResult = mflixRepository.findTestAggregation(age);
         return aggResult.getMappedResults();
     }
 

@@ -11,8 +11,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @ToString
-@Document
-public class Users implements Persistable<ObjectId> {
+//@Document
+public class Users {
 
     @Id
     private ObjectId id;
@@ -22,9 +22,4 @@ public class Users implements Persistable<ObjectId> {
     private String email;
 
     private String password;
-
-    @Override
-    public boolean isNew() {
-        return false;
-    }
 }

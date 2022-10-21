@@ -1,13 +1,13 @@
 package com.example.mongojpapractice.mflix.repository;
 
+import com.example.mongojpapractice.mflix.dto.MflixUserRes;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.AddFieldsOperation;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.MatchOperation;
+import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 public class MflixCustomRepositoryImpl implements MflixCustomRepository {
 
@@ -19,18 +19,28 @@ public class MflixCustomRepositoryImpl implements MflixCustomRepository {
     }
 
     @Override
-    public AggregationResults<Object> findTestAggregation(int age) {
+    public AggregationResults<?> findTestAggregation(int age) {
 
-        Criteria criteria = Criteria.where("email").regex("^jason");
-        MatchOperation matchStage = Aggregation.match(criteria);
+//        Criteria criteria = Criteria.where("email").regex("^jason");
+//        MatchOperation matchStage = Aggregation.match(criteria);
 
         AddFieldsOperation addFieldStage = Aggregation.addFields()
                 .addField("age").withValue(age).build();
+
+        ProjectionOperation projectStage = Aggregation.project()
+                .andExpression("$name").as("email");
+
+//                .and("name").as("이메일")
+//                .and("email").as("E-mail")
+//                .and("password").as("pwd");
+
         Aggregation aggregation = Aggregation.newAggregation(
-                matchStage,
+//                matchStage,
+//                projectStage,
                 addFieldStage
         );
-        AggregationResults<Object> aggResult = mongoTemplate.aggregate(aggregation, "users", Object.class);
+
+        var aggResult = mongoTemplate.aggregate(aggregation, "payee", Object.class);
         return aggResult;
     }
 }
