@@ -18,6 +18,11 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+    set('snakeyaml.version','1.33')
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -38,4 +43,12 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jar {
+    archiveFileName = 'backbone-plain.jar'
+}
+
+bootJar {
+    archiveFileName = 'backbone.jar'
 }

@@ -15,6 +15,7 @@ build/
 .sts4-cache
 bin/
 !**/src/main/**/bin/
+!**/src/main/**/generated/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
@@ -39,3 +40,5 @@ out/
 *.yml
 *.yaml
 *.properties
+gradle/wrapper/gradle-wrapper.jar
+
