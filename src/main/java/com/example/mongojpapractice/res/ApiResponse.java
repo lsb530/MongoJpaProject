@@ -1,6 +1,6 @@
-package com.example.mongojpapractice.config.res;
+package com.example.mongojpapractice.res;
 
-import com.example.mongojpapractice.constants.StatusCodes;
+import com.example.mongojpapractice.config.constants.StatusCodes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import lombok.Getter;
@@ -17,8 +17,6 @@ public class ApiResponse {
     private String message; // 메시지
     private Object data; // 반환 데이터
 
-    public ApiResponse() {}
-
     public ApiResponse(StatusCodes value) {
         this.code = value.name();
         this.message = value.description;
@@ -29,4 +27,5 @@ public class ApiResponse {
         this.message = value.description;
         this.data = data;
     }
+
 }

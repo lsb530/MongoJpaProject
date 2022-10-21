@@ -1,13 +1,11 @@
-package com.example.mongojpapractice.mflix.controller;
+package com.example.mongojpapractice.controller.mflix;
 
 import com.example.mongojpalogic.dto.TestDto;
-import com.example.mongojpapractice.config.res.ApiResponse;
-import com.example.mongojpapractice.constants.StatusCodes;
-import com.example.mongojpapractice.mflix.dto.MflixUserRes;
-import com.example.mongojpapractice.mflix.service.MflixService;
+import com.example.mongojpalogic.mflix.dto.MflixUserRes;
+import com.example.mongojpalogic.mflix.service.MflixService;
+import com.example.mongojpapractice.config.constants.StatusCodes;
+import com.example.mongojpapractice.res.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
-public class MongoController {
+public class MflixController {
 
     private final MflixService mflixService;
 
