@@ -1,1 +1,9 @@
 rootProject.name = 'MongoJpaPractice'
+
+include 'app'
+
+includeBuild('../MongoJpaLogic') {
+    dependencySubstitution {
+        substitute module('com.example:mongojpalogic') using project(':')
+    }
+}

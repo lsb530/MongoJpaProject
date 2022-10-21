@@ -1,5 +1,6 @@
 package com.example.mongojpapractice.mflix.controller;
 
+import com.example.mongojpalogic.dto.TestDto;
 import com.example.mongojpapractice.config.res.ApiResponse;
 import com.example.mongojpapractice.constants.StatusCodes;
 import com.example.mongojpapractice.mflix.dto.MflixUserRes;
@@ -31,6 +32,15 @@ public class MongoController {
     public ResponseEntity<Object> getMflixUsersAggregation(@RequestParam int age) {
         Object mflixUsersWithAge = mflixService.getMflixUsersWithAge(age);
         ApiResponse apiResponse = new ApiResponse(StatusCodes.S001, mflixUsersWithAge);
+        return new ResponseEntity<>(apiResponse, StatusCodes.valueOf(apiResponse.getCode()).status);
+    }
+
+    @GetMapping(value = "/multi-module-test")
+    public ResponseEntity<Object> getRectangle(@RequestParam int width, @RequestParam int height) {
+        TestDto testDto = new TestDto();
+        testDto.setWidth(width);
+        testDto.setHeight(height);
+        ApiResponse apiResponse = new ApiResponse(StatusCodes.S001, testDto);
         return new ResponseEntity<>(apiResponse, StatusCodes.valueOf(apiResponse.getCode()).status);
     }
 }
