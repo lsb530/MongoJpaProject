@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@EnableMongoRepositories("com.example")
+//@EnableMongoRepositories("com.example")
 @ComponentScan("com.example")
 @SpringBootApplication(scanBasePackages = {"com.example"})
 public class MongoJpaPracticeApplication {
