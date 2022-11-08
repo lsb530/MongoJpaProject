@@ -29,6 +29,8 @@ dependencies {
     implementation 'org.springframework.session:spring-session-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.example:mongojpalogic'
 

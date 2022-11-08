@@ -8,6 +8,7 @@ import com.example.mongojpalogic.mflix.repository.MflixUserUserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +40,7 @@ public class TestController {
         Users users = new Users();
         users.setId(new ObjectId());
         users.setName("테스트이름");
-        users.setEmail("test@example.com");
+        users.setEmail("test" + RandomStringUtils.randomNumeric(1) + "@example.com");
         users.setPassword("testtest");
         this.mflixUserUserRepository.save(users);
     }
