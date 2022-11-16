@@ -4,7 +4,8 @@ import com.example.mongojpalogic.dto.TestDto;
 import com.example.mongojpalogic.mflix.dto.CustomMflixUserRes;
 import com.example.mongojpalogic.mflix.dto.MflixUserRes;
 import com.example.mongojpalogic.mflix.service.MflixUserService;
-import com.example.mongojpapractice.config.constants.StatusCodes;
+import com.example.mongojpapractice.config.PersonalConfig;
+import com.example.mongojpapractice.constants.StatusCodes;
 import com.example.mongojpapractice.res.ApiResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MflixUserController {
     private final MflixUserService mflixUserService;
 
+    private final PersonalConfig personalConfig;
+
     @GetMapping(value = "/users")
     public ResponseEntity<List<MflixUserRes>> getMflixUsers() {
+        System.out.println("personalConfig = " + personalConfig);
         return ResponseEntity.ok().body(mflixUserService.getMflixUsers());
     }
 

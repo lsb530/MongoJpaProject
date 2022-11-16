@@ -1,4 +1,4 @@
-package com.example.mongojpapractice.config.constants;
+package com.example.mongojpapractice.constants;
 
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.bson.types.ObjectId;

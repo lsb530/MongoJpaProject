@@ -1,4 +1,4 @@
-package com.example.mongojpapractice.config.constants;
+package com.example.mongojpapractice.constants;
 
 import org.springframework.http.HttpStatus;
 
