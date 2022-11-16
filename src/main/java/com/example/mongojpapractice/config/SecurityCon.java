@@ -53,8 +53,8 @@ public class SecurityCon {
         // Common
         http.authorizeRequests()
             .antMatchers("/error").permitAll()
-            .antMatchers("/api/mflix/users").anonymous()
-            .anyRequest().authenticated();
+            .antMatchers("/api/mflix/users").anonymous();
+//            .anyRequest().authenticated();
 
 
         // GOWID ADMIN url: /api/v2/gowid/ (*ROLE_SUPER*, *ROLE_ADMIN*, ROLE_GOWID)

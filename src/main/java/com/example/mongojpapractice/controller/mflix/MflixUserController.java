@@ -7,7 +7,11 @@ import com.example.mongojpalogic.mflix.service.MflixUserService;
 import com.example.mongojpapractice.config.PersonalConfig;
 import com.example.mongojpapractice.constants.StatusCodes;
 import com.example.mongojpapractice.res.ApiResponse;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +27,48 @@ public class MflixUserController {
     private final MflixUserService mflixUserService;
 
     private final PersonalConfig personalConfig;
+
+    @GetMapping("/session-check2")
+    public ResponseEntity<Object> test(HttpSession session) {
+
+        String sessionId = session.getId();
+
+        LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) session.getAttribute("data");
+
+        Integer count;
+
+        if(data == null) {
+            count = 1;
+        }
+        else {
+            count = (Integer) data.get("count");
+            count++;
+        }
+
+        Map<String, Object> resultMap = new LinkedHashMap<>();
+        resultMap.put("sessionId", sessionId);
+        resultMap.put("count", count);
+
+        session.setAttribute("data", resultMap);
+
+        return ResponseEntity.ok(resultMap);
+    }
+
+    @GetMapping("/session-check")
+    public ResponseEntity<Integer> count(HttpSession session) {
+
+        Integer counter = (Integer) session.getAttribute("count");
+
+        if (counter == null) {
+            counter = 1;
+        } else {
+            counter++;
+        }
+
+        session.setAttribute("count", counter);
+
+        return ResponseEntity.ok(counter);
+    }
 
 //    @PreAuthorize("hasAnyRole('USER')")
     @GetMapping(value = "/users")
