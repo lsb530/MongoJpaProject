@@ -14,9 +14,18 @@
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 <!--    <filter class="com.aibizon.aitax.businesslogic.common.config.LogbackHttpRequestFilter"/>-->
-    <encoder>
-      <charset>UTF-8</charset>
-      <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%thread][%-5level][%logger{36}][%method] - %msg%n</pattern>
+<!--    <encoder>-->
+<!--      <charset>UTF-8</charset>-->
+<!--      <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%thread][%-5level][%logger{36}][%method] - %msg%n</pattern>-->
+<!--    </encoder>-->
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="com.example.mongojpapractice.config.logback.MaskingPatternLayout">
+        <maskPattern>\"SSN\"\s*:\s*\"(.*?)\"</maskPattern> <!-- SSN JSON pattern -->
+        <maskPattern>\"address\"\s*:\s*\"(.*?)\"</maskPattern> <!-- Address JSON pattern -->
+        <maskPattern>(\d+\.\d+\.\d+\.\d+)</maskPattern> <!-- Ip address IPv4 pattern -->
+        <maskPattern>(\w+@\w+\.\w+)</maskPattern> <!-- Email pattern -->
+        <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%thread][%-5level][%logger{36}][%method] - %msg%n</pattern>
+      </layout>
     </encoder>
   </appender>
 
@@ -55,8 +64,7 @@
     <appender-ref ref="historyLog"/>
   </logger>
     <logger name="com.example" level="DEBUG" additivity="FALSE">
-<!--    <appender-ref ref="STDOUT" />-->
-    <appender-ref ref="MASK" />
+    <appender-ref ref="STDOUT" />
     <appender-ref ref="ROLLING" />
   </logger>
   <logger name="org.springframework.security" level="DEBUG" additivity="FALSE">
