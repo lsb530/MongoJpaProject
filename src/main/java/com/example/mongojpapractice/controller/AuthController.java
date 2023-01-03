@@ -3,11 +3,17 @@ package com.example.mongojpapractice.controller;
 import com.example.mongojpalogic.auth.LoginReq;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TimeZone;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +50,7 @@ public class AuthController {
     ObjectMapper mapper;
 
     @PostMapping("/login")
-    public void login(@RequestBody LoginReq loginReq) {
+    public void login(@RequestBody LoginReq loginReq, HttpServletResponse response) {
         UserDetails userDetails = null;
         if (ObjectUtils.isEmpty(loginReq)) throw new RuntimeException("로그인 관련 데이터가 비어있음");
         else if(loginReq.getId().equals("user") && loginReq.getPassword().equals("password")) {
@@ -70,7 +76,18 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public void logout() {
+    public void logout(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            System.out.println("cookie.getName() = " + cookie.getName());
+            System.out.println("cookie.getValue() = " + cookie.getValue());
+        }
+        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.printf("DisplayName: %s, ID: %s, Offset: %s%n",
+            TimeZone.getDefault().getDisplayName(),
+            TimeZone.getDefault().getID(),
+            TimeZone.getDefault().getRawOffset());
+        System.out.println("------------------------------------------------------------------------------------------");
         SecurityContextHolder.clearContext();
     }
 }

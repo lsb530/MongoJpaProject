@@ -3,6 +3,7 @@ package com.example.mongojpapractice.controller.mflix;
 import com.example.mongojpalogic.mflix.document.Movies;
 import com.example.mongojpalogic.mflix.service.MflixMovieService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class MflixMovieController {
     }
 
     @GetMapping(value = "/movie/{id}")
-    public ResponseEntity<Movies> getMflixMovie(@PathVariable ObjectId id) {
+    public ResponseEntity<Movies> getMflixMovie(@PathVariable ObjectId id, HttpServletRequest request) {
         Movies mflixMovie = mflixMovieService.getMflixMovie(id);
         return ResponseEntity.status(HttpStatus.OK).body(mflixMovie);
     }
