@@ -30,6 +30,7 @@ spring:
 
 boki:
   timeZone: Asia/Seoul
+  slackBot:
 
   personalInfo:
     age:

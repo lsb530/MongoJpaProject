@@ -1,5 +1,7 @@
 package com.example.mongojpapractice.controller;
 
+import static com.example.mongojpapractice.util.MessageUtil.sendSlackMessage;
+
 import com.example.mongojpalogic.auth.LoginReq;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,6 +70,7 @@ public class AuthController {
 
             SecurityContext context = SecurityContextHolder.getContext();
             context.setAuthentication(authenticationToken);
+            sendSlackMessage(String.format("아이디 [%s] 사용자 사이트에 로그인했습니다",userDetails.getUsername()));
             log.info("로그인 성공");
         }
         else {
