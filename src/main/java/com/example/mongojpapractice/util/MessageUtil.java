@@ -1,6 +1,6 @@
 package com.example.mongojpapractice.util;
 
-import com.example.mongojpalogic.common.config.BusinessLogicConfig;
+import com.example.mongojpalogic.common.config.var.BusinessLogicConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
@@ -20,8 +20,6 @@ public class MessageUtil {
 
     private MessageUtil(BusinessLogicConfig businessLogicConfig) {
         MessageUtil.businessLogicConfig = businessLogicConfig;
-        System.out.println(
-            "businessLogicConfig.getSlackBot() = " + businessLogicConfig.getSlackBot());
     }
 
     /**

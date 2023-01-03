@@ -56,6 +56,7 @@ public class SecurityConig {
             .antMatchers("/error").permitAll()
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers("/api/mflix/users").anonymous()
+            .antMatchers(("/api/test**/**")).permitAll()
             .anyRequest().authenticated();
 
         // GOWID ADMIN url: /api/v2/gowid/ (*ROLE_SUPER*, *ROLE_ADMIN*, ROLE_GOWID)

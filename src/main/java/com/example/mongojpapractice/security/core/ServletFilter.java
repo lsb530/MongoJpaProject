@@ -53,7 +53,9 @@ public class ServletFilter extends OncePerRequestFilter {
 
             String[] segments = aURL.getPath().split("/");
 
-            if ((!(segments[3].isEmpty()) && this.checkExclude(segments[3]))) {
+            String lastPathStr = segments[segments.length - 1];
+
+            if ((!(lastPathStr.isEmpty()) && this.checkExclude(lastPathStr))) {
 
                 return true;
             }
