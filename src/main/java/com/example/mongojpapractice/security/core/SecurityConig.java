@@ -1,7 +1,5 @@
-package com.example.mongojpapractice.config;
+package com.example.mongojpapractice.security.core;
 
-import com.example.mongojpapractice.security.core.CustomAuthenticationEntryPoint;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +16,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @EnableWebSecurity
 @Configuration
-public class SecurityCon {
+public class SecurityConig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -53,9 +51,9 @@ public class SecurityCon {
         // Common
         http.authorizeRequests()
             .antMatchers("/error").permitAll()
-            .antMatchers("/api/mflix/users").anonymous();
-//            .anyRequest().authenticated();
-
+            .antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/api/mflix/users").anonymous()
+            .anyRequest().authenticated();
 
         // GOWID ADMIN url: /api/v2/gowid/ (*ROLE_SUPER*, *ROLE_ADMIN*, ROLE_GOWID)
         // 나중에 ADMIN 은 제거.

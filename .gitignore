@@ -38,7 +38,7 @@ out/
 .vscode/
 
 *.yml
-*.yaml
+application.yaml
 *.properties
 gradle/wrapper/gradle-wrapper.jar
 

@@ -1,0 +1,76 @@
+package com.example.mongojpapractice.controller;
+
+import com.example.mongojpalogic.auth.LoginReq;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import javax.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.boot.configurationprocessor.json.JSONStringer;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Slf4j
+@RequiredArgsConstructor
+@RequestMapping("/api/auth")
+@RestController
+public class AuthController {
+
+    @Autowired
+    UserDetailsService userDetailsService;
+
+    @Autowired
+    InMemoryUserDetailsManager inMemoryUserDetailsManager;
+
+    @Autowired
+    ObjectMapper mapper;
+
+    @PostMapping("/login")
+    public void login(@RequestBody LoginReq loginReq) {
+        UserDetails userDetails = null;
+        if (ObjectUtils.isEmpty(loginReq)) throw new RuntimeException("로그인 관련 데이터가 비어있음");
+        else if(loginReq.getId().equals("user") && loginReq.getPassword().equals("password")) {
+            userDetails = inMemoryUserDetailsManager.loadUserByUsername("user");
+        }
+        else if(loginReq.getId().equals("admin") && loginReq.getPassword().equals("admin")) {
+            userDetails = inMemoryUserDetailsManager.loadUserByUsername("admin");
+        }
+        if (userDetails != null) {
+            UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(
+                    userDetails, userDetails.getPassword(),
+                    userDetails.getAuthorities()
+                );
+
+            SecurityContext context = SecurityContextHolder.getContext();
+            context.setAuthentication(authenticationToken);
+            log.info("로그인 성공");
+        }
+        else {
+            log.info("로그인 실패");
+        }
+    }
+
+    @PostMapping("/logout")
+    public void logout() {
+        SecurityContextHolder.clearContext();
+    }
+}

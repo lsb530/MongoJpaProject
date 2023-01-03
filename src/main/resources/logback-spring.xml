@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+<!--    <filter class="com.aibizon.aitax.businesslogic.common.config.LogbackHttpRequestFilter"/>-->
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%thread][%-5level][%logger{36}][%method] - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>log/backbone.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/backbone.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>200MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+      <!-- <maxHistory>180</maxHistory> -->
+    </rollingPolicy>
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>[%d{yyyy-MM-dd HH:mm:ss}][%thread][%-5level][%logger{36}][%method] - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- Cert 등록/삭제 이력-->
+  <appender name="historyLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>log/history.log</File>
+    <encoder>
+      <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] - %m%n</pattern>
+      <ImmediateFlush>true</ImmediateFlush>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/history.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>200MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+      <!-- <maxHistory>180</maxHistory> -->
+    </rollingPolicy>
+  </appender>
+
+  <logger name="history" level="INFO">
+    <appender-ref ref="historyLog"/>
+  </logger>
+
+    <logger name="com.aibizon.aitax" level="DEBUG" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.springframework.security" level="DEBUG" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.springframework.data.mongodb" level="DEBUG" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.springframework.session" level="DEBUG" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.springframework.session.web.http.SessionRepositoryFilter.SESSION_LOGGER" level="INFO" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.spring.framework.web" level="DEBUG" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.mongodb.driver.protocol.command" level="WARN" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.mongodb.driver.cluster" level="WARN" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <logger name="org.mongodb.driver.connection" level="WARN" additivity="FALSE">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </logger>
+  <root level="OFF">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="ROLLING" />
+  </root>
+
+</configuration>
+

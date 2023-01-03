@@ -1,0 +1,55 @@
+spring:
+  web:
+    resources:
+      add-mappings: false
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  thymeleaf:
+    cache: false
+
+  data:
+    web:
+      pageable:
+        default-page-size: 200
+        max-page-size: 10000
+        one-indexed-parameters: false
+        page-parameter: pageNo
+        size-parameter: maxPageItemNo
+    mongodb:
+      mflix.uri:
+      session.uri:
+      guides.uri:
+
+  session:
+    #    timeout: 86400
+    timeout: 30
+    store-type: mongodb
+    mongodb:
+      collection-name: session
+
+boki:
+  timeZone: Asia/Seoul
+
+  personalInfo:
+    age:
+    height:
+    name:
+
+  skills:
+    springframework:
+    node:
+    django:
+
+#logging.level:
+#  org.springframework:
+#    security: DEBUG
+#    data:
+#      mongodb: DEBUG
+#    web.server.adapter.HttpWebHandlerAdapter: DEBUG
+
+#logging:
+#  config: ./config/logback-spring.xml
+
+logging.level:
+  root: INFO
